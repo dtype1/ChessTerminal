@@ -6,12 +6,11 @@ import chess.ChessPiece;
 import utils.ChessUtils;
 
 /**
- * <p>This class is responsible for instantiating an object of type queen.</p>
- * <p>This class extends the "ChessPiece" class because all checkers have the same attributes.</p>
+ * This class is responsible for instantiating an object of type queen. This class extends the "ChessPiece" class because all checkers have the same attributes.
  */
 public class Queen extends ChessPiece {
     public Queen(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.QUEEN_CHAR, Constants.QUEEN);
+        super(board, chessUtils, Constants.QUEEN_CHAR, Constants.QUEEN, ChessUtils.convertToAscii(81));
     }
 
     /**
@@ -20,6 +19,6 @@ public class Queen extends ChessPiece {
      */
     @Override
     public String toString() {
-        return this.getUnicodeManager().getUnicodeIcon("\u265b");
+        return ChessUtils.generateUnicode("\u265b");
     }
 }

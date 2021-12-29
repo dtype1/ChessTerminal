@@ -6,12 +6,11 @@ import chess.ChessPiece;
 import utils.ChessUtils;
 
 /**
- * <p>This class is responsible for instantiating an object of type bishop.</p>
- * <p>This class extends the "ChessPiece" class because all checkers have the same attributes.</p>
+ * This class is responsible for instantiating an object of type bishop. This class extends the "ChessPiece" class because all checkers have the same attributes.
  */
 public class Bishop extends ChessPiece {
     public Bishop(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.BISHOP_CHAR, Constants.BISHOP);
+        super(board, chessUtils, Constants.BISHOP_CHAR, Constants.BISHOP, ChessUtils.convertToAscii(66));
     }
 
     /**
@@ -20,6 +19,6 @@ public class Bishop extends ChessPiece {
      */
     @Override
     public String toString() {
-        return this.getUnicodeManager().getUnicodeIcon("\u265d");
+        return ChessUtils.generateUnicode("\u265d");
     }
 }

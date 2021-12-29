@@ -6,12 +6,11 @@ import utils.ChessUtils;
 import utils.Constants;
 
 /**
- * <p>This class is responsible for instantiating an object of type pawn.</p>
- * <p>This class extends the "ChessPiece" class because all checkers have the same attributes.</p>
+ * This class is responsible for instantiating an object of type pawn. This class extends the "ChessPiece" class because all checkers have the same attributes.
  */
 public class Pawn extends ChessPiece {
     public Pawn(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.PAWN_CHAR, Constants.PAWN);
+        super(board, chessUtils, Constants.PAWN_CHAR, Constants.PAWN, ChessUtils.convertToAscii(80));
     }
 
     /**
@@ -20,6 +19,6 @@ public class Pawn extends ChessPiece {
      */
     @Override
     public String toString() {
-        return this.getUnicodeManager().getUnicodeIcon("\u265f");
+        return ChessUtils.generateUnicode("\u265f");
     }
 }

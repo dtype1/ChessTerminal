@@ -1,6 +1,9 @@
 package utils;
 
-
+/**
+ * This class is used to hold all error messages throughout the game.
+ */
+@SuppressWarnings("all")
 public class Constants {
 
     // Error's or info's message
@@ -9,12 +12,14 @@ public class Constants {
     public static final String PIECE_ALREADY_EXIST = "Errore: in una cella può essere posizionata una sola pedina!";
     public static final String INCORRECT_PIECE_COORDINATE = "Errore: cordinata fuori dalla scacchiera!";
     public static final String PIECE_NOT_FOUND = "Tipo di pedina non trovato";
-    public static final String JSON_ERROR = "File JSON incompleto!";
+    public static final String JSON_ERROR = "File JSON incompleto o vuoto!";
     public static final String FILE_NOT_FOUND = "File non trovato!";
     public static final String IO_EXCEPTION = "Oops, c'è stato un'errore improvviso.";
     public static final String PARSE_ERROR = "Errore: parsing del file non riuscito!";
     public static final String GENERIC_ERROR = "Errore: è accaduto un errore imprevisto! Riprovare!";
-    public static final String FILE_ALREADY_EXISTS = "Info: il file indicato esiste già!";
+    public static final String WRITE_FILE_CORRECT = "Info: il file è stato scritto con successo";
+    public static final String WRONG_JSON_STRUCTURE = "Errore: formattazione del file errata. Seguire il file di esempio.";
+    public static final String ALTERNATIVE_FILE_WRITE = "Attenzione: data l'esistenza di un file con lo stesso nome fornito per la scrittura, questa parita sarà scritta nel file '";
 
     // Piece's character id
     public static final char BISHOP_CHAR = 'B';
@@ -35,11 +40,12 @@ public class Constants {
     // JSON File node name
     public static final String BLACK_PIECE = String.valueOf(ChessUtils.BLACK);
     public static final String YELLOW_PIECE = String.valueOf(ChessUtils.YELLOW);
-    public static final String PIECE_NODE = "pieces";
     public static final String COMMENT_NODE = "__comment__";
 
-    // Configuration
-    public static final String GENERIC_DIRECTORY = "d:\\";
+    // Configurations
+    public static final String GENERIC_DIRECTORY = "c:\\";
     public static final String GENERIC_FILE_READ = "readChess.json";
     public static final String GENERIC_FILE_WRITE = "writeChess.json";
+    public static final String FILE_EXTENSION = ".json";
+    public static final Long RANDOM_NUMBER = Math.round(Math.random() * (500 - 10 + 1) + 10);
 }

@@ -1,19 +1,20 @@
 package chess;
 
+import exceptions.GenericException;
 import utils.Constants;
 import board.BoardCoordinate;
-import chess.exceptions.ChessException;
 
 /**
  * This is a "container" class used to contain the coordinates referred to the classic reading (letter + number)
  */
+@SuppressWarnings("unused")
 public class ChessCoordinate {
     private char column;
     private int row;
 
     public ChessCoordinate(char column, int row) {
         if (column < 'a' || column > 'h' || row < 1 || row > 8) {
-            throw new ChessException(Constants.INCORRECT_PIECE_COORDINATE);
+            throw new GenericException(Constants.INCORRECT_PIECE_COORDINATE);
         }
 
         this.column = column;
@@ -50,7 +51,7 @@ public class ChessCoordinate {
      * @param boardCoordinate cell coordinates
      * @return chessboard coordinates
      */
-    public static ChessCoordinate fromBoardCoordinate(BoardCoordinate boardCoordinate) {
+    public static ChessCoordinate fromBoardCoordinate(BoardCoordinate boardCoordinate) throws GenericException {
         return new ChessCoordinate((char)('a' + boardCoordinate.getY()),8 - boardCoordinate.getX());
     }
 

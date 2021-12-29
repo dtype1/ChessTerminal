@@ -1,5 +1,8 @@
-package storage.pieces;
+package storage;
 
+/**
+ * This class is a container class as it only handles an array and data insertion/request.
+ */
 public class JSONPieces {
     private final StoragePiece[] storagePiece;
     private int currentIndex;

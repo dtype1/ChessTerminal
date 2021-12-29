@@ -3,6 +3,7 @@ package board;
 /**
  * This class contains the x and y coordinate of a given cell
  */
+@SuppressWarnings("unused")
 public class BoardCoordinate {
     private int x;
     private int y;
@@ -25,11 +26,6 @@ public class BoardCoordinate {
     }
 
     public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setCoordinates(int x, int y) {
-        this.x = x;
         this.y = y;
     }
 

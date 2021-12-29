@@ -6,12 +6,11 @@ import chess.ChessPiece;
 import utils.ChessUtils;
 
 /**
- * <p>This class is responsible for instantiating an object of type rook.</p>
- * <p>This class extends the "ChessPiece" class because all checkers have the same attributes.</p>
+ * This class is responsible for instantiating an object of type rook. This class extends the "ChessPiece" class because all checkers have the same attributes.
  */
 public class Rook extends ChessPiece {
     public Rook(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.ROOK_CHAR, Constants.ROOK);
+        super(board, chessUtils, Constants.ROOK_CHAR, Constants.ROOK, ChessUtils.convertToAscii(82));
     }
 
     /**
@@ -20,6 +19,6 @@ public class Rook extends ChessPiece {
      */
     @Override
     public String toString() {
-        return getUnicodeManager().getUnicodeIcon("\u265c");
+        return ChessUtils.generateUnicode("\u265c");
     }
 }
