@@ -1,7 +1,7 @@
 package chess;
 
 import board.Board;
-import exceptions.GenericException;
+import utils.exceptions.GenericException;
 import pieces.*;
 import storage.FileManager;
 import storage.JSONPieces;
@@ -25,7 +25,7 @@ public class ChessGame {
     private List<ChessPiece> piecesOnChessboard = new ArrayList<>();
 
     public ChessGame(FileManager fileManager) {
-        this.board = new Board(8, 8);
+        this.board = new Board(Constants.NUM_ROWS, Constants.NUM_COLUMNS);
         this.currentPlayer = ChessUtils.YELLOW;
         this.fileManager = fileManager;
         this.setupPieceOnChessboard();
@@ -106,7 +106,7 @@ public class ChessGame {
 
     /**
      * This method is the main method that takes care of starting the process of reading the file. If all the integrity checks of the json file are passed, the coordinates of the checkers are divided by color within the method.
-     * @throws GenericException if the json arrays containing the coordinates are null, it is reported that there is no data in the file.
+     * @exception GenericException if the json arrays containing the coordinates are null, it is reported that there is no data in the file.
      */
     private void setupPieceOnChessboard() {
         JSONPieces jsonPieces = this.fileManager.loadGame();

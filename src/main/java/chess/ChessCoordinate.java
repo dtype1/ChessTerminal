@@ -1,6 +1,6 @@
 package chess;
 
-import exceptions.GenericException;
+import utils.exceptions.GenericException;
 import utils.Constants;
 import board.BoardCoordinate;
 

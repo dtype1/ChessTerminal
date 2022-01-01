@@ -1,4 +1,4 @@
-package exceptions;
+package utils.exceptions;
 
 /**
  * This class extends "RuntimeException" to be able to create custom error messages.

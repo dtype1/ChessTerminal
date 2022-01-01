@@ -1,7 +1,9 @@
 package storage;
 
 import org.json.simple.JSONArray;
-import exceptions.GenericException;
+import utils.exceptions.GenericException;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import utils.ChessUtils;
 import utils.Constants;
 import org.json.simple.JSONObject;
@@ -17,7 +19,6 @@ public class FileManager {
     private String directory;
     private String fileReadName;
     private String fileWriteName;
-    private final Reader reader = new Reader();
 
     /**
      * This constructor is used when the object is instantiated without passing any parameters. Then the attributes are set to the default values (when the user does not want to customize the sources).
@@ -26,6 +27,7 @@ public class FileManager {
         this.directory = Constants.GENERIC_DIRECTORY;
         this.fileReadName = Constants.GENERIC_FILE_READ;
         this.fileWriteName = Constants.GENERIC_FILE_WRITE;
+        this.initialization();
     }
 
     /**
@@ -38,6 +40,39 @@ public class FileManager {
         this.directory = directory;
         this.fileReadName = fileReadName;
         this.fileWriteName = fileWriteName;
+        this.initialization();
+    }
+
+    public String getReadSource() {
+        return this.directory + this.fileReadName;
+    }
+
+    public String getWriteSource() {
+        return this.directory + this.fileWriteName;
+    }
+
+    public String getDirectory() {
+        return this.directory;
+    }
+
+    public String getFileReadName() {
+        return fileReadName;
+    }
+
+    public String getFileWriteName() {
+        return fileWriteName;
+    }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
+    }
+
+    public void setFileReadName(String fileReadName) {
+        this.fileReadName = fileReadName;
+    }
+
+    public void setFileWriteName(String fileWriteName) {
+        this.fileWriteName = fileWriteName;
     }
 
     /**
@@ -46,7 +81,7 @@ public class FileManager {
      */
     public JSONPieces loadGame() {
         try {
-            ArrayList<JSONObject> chessBoard = (ArrayList<JSONObject>) this.reader.read(this.directory + this.fileReadName);
+            ArrayList<JSONObject> chessBoard = (ArrayList<JSONObject>) read(this.directory + this.fileReadName);
             JSONPieces jsonPieces = new JSONPieces(6);
 
             for (JSONObject tmp : chessBoard) {
@@ -85,14 +120,37 @@ public class FileManager {
 
         // It checks if a file with the same name as the write file already exists and is not empty in the directory initially provided.
         // If another file is found, an ID number is added before the file extension.
-        if(this.existFile(this.getWriteSource()) && !this.isEmptyFile(this.getWriteSource())) {
+        if(existFile(this.getWriteSource()) && !isEmptyFile(this.getWriteSource())) {
             System.out.print(ChessUtils.ANSI_RED);
             this.setFileWriteName(this.getFileWriteName().replace(Constants.FILE_EXTENSION, String.format("(%o)%s", Constants.RANDOM_NUMBER, Constants.FILE_EXTENSION)));
             System.out.println(Constants.ALTERNATIVE_FILE_WRITE + this.fileWriteName + "'");
         }
 
         // Pass the created structure to the method that will take care of writing it to the file.
-        reader.write(this.directory + this.fileWriteName, String.valueOf(json));
+        write(this.directory + this.fileWriteName, String.valueOf(json));
+    }
+
+    /**
+     *
+     * @param path
+     * @return
+     */
+    public boolean existDirectory(String path) {
+        File file = new File(path);
+        return file.isDirectory();
+    }
+
+    /**
+     * This method is used to create a folder within a path
+     * @param path origin path name
+     * @param dirName name of the folder to be created
+     * @return "true" if the folder has been created and "false" if it has not been created. Generally if it is not created an exception occurs.
+     */
+    public boolean createFolder(String path) {
+        File file = new File(path);
+        file.mkdir();
+
+        return file.mkdir();
     }
 
     /**
@@ -124,35 +182,63 @@ public class FileManager {
         }
     }
 
-    public String getReadSource() {
-        return this.directory + this.fileReadName;
+
+    /**
+     * This method deals with reading files and returning its contents.
+     * @param file path including the name of the file to be read
+     * @exception FileNotFoundException this exception is thrown when the given file does not exist in the folder
+     * @exception IOException this exception is invoked when an unexpected error occurs during reading or writing
+     * @exception ParseException this exception is thrown when an error occurs while parsing the file content from text to object
+     * @return an "Object" containing the whole read file is returned.
+     */
+    public Object read(String file) {
+        JSONParser parser = new JSONParser();
+
+        try {
+            return parser.parse(new FileReader(file));
+        } catch(FileNotFoundException e) {
+            throw new GenericException(Constants.FILE_NOT_FOUND);
+        } catch (IOException e) {
+            throw new GenericException(Constants.IO_EXCEPTION);
+        } catch (ParseException e) {
+            throw new GenericException(Constants.PARSE_ERROR);
+        } catch(Exception e) {
+            throw new GenericException(Constants.GENERIC_ERROR);
+        }
     }
 
-    public String getWriteSource() {
-        return this.directory + this.fileWriteName;
+    /**
+     * Questo metodo si occupa di scrivere i contenuto passato come parametro nel file indicato.
+     * @param file path including the name of the file to be write
+     * @param obj string which will be written in the indicated file
+     * @exception FileNotFoundException this exception is thrown when the given file does not exist in the folder
+     * @exception IOException this exception is invoked when an unexpected error occurs during reading or writing
+     */
+    public void write(String file, String obj) {
+        FileWriter fileWriter;
+
+        try {
+            fileWriter = new FileWriter(file);
+            fileWriter.write(obj);
+            fileWriter.close();
+
+            System.out.print(ChessUtils.ANSI_GREEN);
+            System.out.println(Constants.WRITE_FILE_CORRECT);
+        } catch(FileNotFoundException e) {
+            throw new GenericException(Constants.FILE_NOT_FOUND);
+        } catch (IOException e) {
+            throw new GenericException(Constants.IO_EXCEPTION);
+        } catch(Exception e) {
+            throw new GenericException(Constants.GENERIC_ERROR);
+        }
     }
 
-    public String getDirectory() {
-        return this.directory;
-    }
-
-    public void setDirectory(String directory) {
-        this.directory = directory;
-    }
-
-    public String getFileReadName() {
-        return fileReadName;
-    }
-
-    public void setFileReadName(String fileReadName) {
-        this.fileReadName = fileReadName;
-    }
-
-    public String getFileWriteName() {
-        return fileWriteName;
-    }
-
-    public void setFileWriteName(String fileWriteName) {
-        this.fileWriteName = fileWriteName;
+    /**
+     * This method is used during the creation of the "FileManager" object, as it verifies the existence of the folder that will be used as a read/write source
+     */
+    private void initialization() {
+        if(!existDirectory(this.directory)) {
+            this.createFolder(this.directory);
+        }
     }
 }

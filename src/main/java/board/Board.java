@@ -1,6 +1,6 @@
 package board;
 
-import exceptions.GenericException;
+import utils.exceptions.GenericException;
 import utils.Constants;
 
 /**
@@ -12,7 +12,7 @@ public class Board {
     private final BoardPiece[][] boardPieces;
 
     public Board(int rows, int columns) {
-        if (rows < 1 || columns < 1) {
+        if (rows < 1 || columns < 1 || rows > 8 || columns > 8) {
             throw new GenericException(Constants.INVALID_DIMENSION);
         }
 
@@ -60,7 +60,7 @@ public class Board {
 
     /**
      * This method deals with placing a token in an x and y cell.
-     * @param boardPiece      piece object that represents the piece you want to position
+     * @param boardPiece piece object that represents the piece you want to position
      * @param boardCoordinate object coordinate which refers to the position on the chessboard
      * @exception GenericException if in that x y cell is already present a pawn
      */
@@ -86,9 +86,8 @@ public class Board {
     /**
      * Check if position exists into board.
      * To be valid, the row and column numbers must be within the area of the checkerboard.
-     *
-     * @param row: number of selected row
-     * @param column: number of selected column
+     * @param row number of selected row
+     * @param column number of selected column
      * @return true or false if row and column are in board
      */
     public boolean coordinateExists(int row, int column) {

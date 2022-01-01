@@ -1,6 +1,7 @@
 package pieces;
 
 import board.Board;
+import chess.ChessCoordinate;
 import chess.ChessPiece;
 import utils.ChessUtils;
 import utils.Constants;
@@ -10,15 +11,6 @@ import utils.Constants;
  */
 public class Pawn extends ChessPiece {
     public Pawn(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.PAWN_CHAR, Constants.PAWN, ChessUtils.convertToAscii(80));
-    }
-
-    /**
-     * This method is used to return the unicode icon of the token.
-     * @return unicode character string
-     */
-    @Override
-    public String toString() {
-        return ChessUtils.generateUnicode("\u265f");
+        super(board, chessUtils, Constants.PAWN_CHAR, Constants.PAWN, 80, "\u265f");
     }
 }

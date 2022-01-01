@@ -21,10 +21,10 @@ public class TerminalManager {
      */
     public static void init() {
         System.out.print(ChessUtils.ANSI_BLUE);
-        System.out.println("SCAHHIERA:");
+        System.out.println("SCAHHIERA");
 
         System.out.print(ChessUtils.ANSI_RED);
-        System.out.print("\nVuoi iniziare? (si/no)? ");
+        System.out.print("Vuoi iniziare? (si/no)? ");
         String choose = scn.nextLine();
 
         if(checkChoose(choose)) {
@@ -50,7 +50,7 @@ public class TerminalManager {
             ChessGame chessGame = new ChessGame(fileManager);
 
             System.out.print(ChessUtils.ANSI_CYAN);
-            System.out.print("Vuoi rappresentare la scacchiera in formato ASCII/Tabella/Unicode (1/2/3): ");
+            System.out.print("Vuoi rappresentare la scacchiera in formato ASCII/Tabellare/Unicode (1/2/3): ");
             String chooseInt = scn.next();
 
             System.out.print(ChessUtils.ANSI_RESET);
@@ -142,9 +142,9 @@ public class TerminalManager {
     private static void printPieceAscii(ChessPiece piece) {
         if(piece != null) {
             if(piece.getColor() == ChessUtils.YELLOW) {
-                System.out.print(ChessUtils.ANSI_YELLOW + piece.getPieceAscii() + ChessUtils.ANSI_RESET );
+                System.out.print(ChessUtils.ANSI_YELLOW + piece.getAscii() + ChessUtils.ANSI_RESET );
             } else {
-                System.out.print(ChessUtils.ANSI_WHITE + piece.getPieceAscii() + ChessUtils.ANSI_RESET);
+                System.out.print(ChessUtils.ANSI_WHITE + piece.getAscii() + ChessUtils.ANSI_RESET);
             }
         } else {
             System.out.print(ChessUtils.ANSI_PURPLE + ChessUtils.convertToAscii(88) + ChessUtils.ANSI_RESET);
