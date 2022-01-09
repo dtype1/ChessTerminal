@@ -1,7 +1,6 @@
 package pieces;
 
 import board.Board;
-import chess.ChessCoordinate;
 import chess.ChessPiece;
 import utils.ChessUtils;
 import utils.Constants;
@@ -11,6 +10,8 @@ import utils.Constants;
  */
 public class Bishop extends ChessPiece {
     public Bishop(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.BISHOP_CHAR, Constants.BISHOP, 66, "\u265d");
+        super(board, chessUtils, Constants.BISHOP_CHAR, Constants.BISHOP, 66);
     }
+
+
 }

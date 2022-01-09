@@ -1,7 +1,6 @@
 package pieces;
 
 import board.Board;
-import chess.ChessCoordinate;
 import chess.ChessPiece;
 import utils.ChessUtils;
 import utils.Constants;
@@ -11,6 +10,6 @@ import utils.Constants;
  */
 public class Knight extends ChessPiece {
     public Knight(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.KNIGHT_CHAR, Constants.KNIGHT, 75, "\u265e");
+        super(board, chessUtils, Constants.KNIGHT_CHAR, Constants.KNIGHT, 75);
     }
 }

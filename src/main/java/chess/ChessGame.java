@@ -1,6 +1,7 @@
 package chess;
 
 import board.Board;
+import org.json.simple.JSONArray;
 import utils.exceptions.GenericException;
 import pieces.*;
 import storage.FileManager;
@@ -8,14 +9,12 @@ import storage.JSONPieces;
 import storage.StoragePiece;
 import utils.ChessUtils;
 import utils.Constants;
-import org.json.simple.JSONArray;
 
 import java.util.*;
 import java.util.List;
 
 /**
  * This class handles the interactions between the checkers and the player (json file).
- * Initially, this class was primarily designed to handle movement.
  */
 @SuppressWarnings("unused")
 public class ChessGame {
@@ -24,7 +23,7 @@ public class ChessGame {
     private final FileManager fileManager;
     private List<ChessPiece> piecesOnChessboard = new ArrayList<>();
 
-    public ChessGame(FileManager fileManager) {
+    public ChessGame(final FileManager fileManager) {
         this.board = new Board(Constants.NUM_ROWS, Constants.NUM_COLUMNS);
         this.currentPlayer = ChessUtils.YELLOW;
         this.fileManager = fileManager;
@@ -80,7 +79,7 @@ public class ChessGame {
     /**
      * This method is used to place a new object (ChessPiece) which is a token type. Finally, the new piece is added to the pieces on the chessboard
      */
-    private void placeNewPiece(char column, int row, ChessPiece piece) throws GenericException {
+    private void placeNewPiece(char column, int row, ChessPiece piece) {
         this.board.placePiece(piece, new ChessCoordinate(column, row).toBoardCoordinate());
         this.piecesOnChessboard.add(piece);
     }

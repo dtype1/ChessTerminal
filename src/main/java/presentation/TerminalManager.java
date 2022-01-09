@@ -21,10 +21,12 @@ public class TerminalManager {
      */
     public static void init() {
         System.out.print(ChessUtils.ANSI_BLUE);
-        System.out.println("SCAHHIERA");
-
-        System.out.print(ChessUtils.ANSI_RED);
-        System.out.print("Vuoi iniziare? (si/no)? ");
+        System.out.printf("Informazioni:\n" +
+                "Assieme al codice è presente un file json chiamato '%s' Questo file è il file di lettura di esempio per poter verificare il funzionamento.\n" +
+                "Di default il programma cerca questo file con questo nome nel disco '%s'.\n" +
+                "Invece se richiesto di eseguire la scrittura di default il programma crea un file chiamato '%s' nel disco '%s'.\n",
+                Constants.GENERIC_FILE_READ, Constants.GENERIC_DIRECTORY, Constants.GENERIC_FILE_WRITE, Constants.GENERIC_DIRECTORY);
+        System.out.print("\nVuoi iniziare? (si/no)? ");
         String choose = scn.nextLine();
 
         if(checkChoose(choose)) {
@@ -50,35 +52,25 @@ public class TerminalManager {
             ChessGame chessGame = new ChessGame(fileManager);
 
             System.out.print(ChessUtils.ANSI_CYAN);
-            System.out.print("Vuoi rappresentare la scacchiera in formato ASCII/Tabellare/Unicode (1/2/3): ");
+            System.out.print("Vuoi rappresentare la scacchiera in formato tabellare o ASCII (1/2): ");
             String chooseInt = scn.next();
 
             System.out.print(ChessUtils.ANSI_RESET);
             clearTerminal();
 
             if(chooseInt.equals("1")) {
-                printBoard(chessGame.getPieces(), false);
-                answerWriteTest(chessGame);
-            } else if(chooseInt.equals("2")) {
                 printTable(chessGame.getPieces());
             } else {
-                printBoard(chessGame.getPieces(), true);
-                answerWriteTest(chessGame);
+                printBoard(chessGame.getPieces());
+
+                System.out.print("\nVuoi eseguire il test di scrittura del file? ");
+                if(checkChoose(scn.next())) {
+                    chessGame.testWritingFile();
+                }
             }
         } else {
             System.out.close();
             clearTerminal();
-        }
-    }
-
-    /**
-     * This method deals with asking the player after representing the chessboard in ASCII or Unicode format.
-     * @param chessGame in this case is used almost as a "context" in order to call the method which is responsible for launching the writing.
-     */
-    public static void answerWriteTest(ChessGame chessGame) {
-        System.out.print("\nVuoi eseguire il test di scrittura del file? ");
-        if(checkChoose(scn.next())) {
-            chessGame.testWritingFile();
         }
     }
 
@@ -101,38 +93,18 @@ public class TerminalManager {
      * @param pieces two-dimensional array containing a matrix on the basis of which the chessboard will be created in "graphical" format.
      * @param mode this parameter is used to figure out what kind of layout/presentation to set.
      */
-    private static void printBoard(ChessPiece[][] pieces, boolean mode) {
+    private static void printBoard(ChessPiece[][] pieces) {
         for(int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + "\s");
 
             for(int k = 0; k < pieces.length; k++) {
-                if (mode) {
-                    printPieceUnicode(pieces[i][k]);
-                } else {
-                    printPieceAscii(pieces[i][k]);
-                }
+                printPieceAscii(pieces[i][k]);
             }
 
             System.out.println();
         }
 
-        System.out.println(mode ? "  A  B C  D  E F  G H" : "  A B C D E F G H");
-    }
-
-    /**
-     * This method takes care of printing the token passed as a parameter and according to the color set the relative color. Null coordinates are not represented.
-     * @param piece object which can represent all the existing token types in the game.
-     */
-    private static void printPieceUnicode(ChessPiece piece) {
-        if(piece != null) {
-            if(piece.getColor() == ChessUtils.YELLOW) {
-                System.out.print(ChessUtils.ANSI_YELLOW + piece + ChessUtils.ANSI_RESET);
-            } else {
-                System.out.print(ChessUtils.ANSI_WHITE + piece + ChessUtils.ANSI_RESET);
-            }
-        }
-
-        System.out.print(" ");
+        System.out.println("  A B C D E F G H");
     }
 
     /**
@@ -142,9 +114,9 @@ public class TerminalManager {
     private static void printPieceAscii(ChessPiece piece) {
         if(piece != null) {
             if(piece.getColor() == ChessUtils.YELLOW) {
-                System.out.print(ChessUtils.ANSI_YELLOW + piece.getAscii() + ChessUtils.ANSI_RESET );
+                System.out.print(ChessUtils.ANSI_YELLOW + piece + ChessUtils.ANSI_RESET );
             } else {
-                System.out.print(ChessUtils.ANSI_WHITE + piece.getAscii() + ChessUtils.ANSI_RESET);
+                System.out.print(ChessUtils.ANSI_WHITE + piece + ChessUtils.ANSI_RESET);
             }
         } else {
             System.out.print(ChessUtils.ANSI_PURPLE + ChessUtils.convertToAscii(88) + ChessUtils.ANSI_RESET);

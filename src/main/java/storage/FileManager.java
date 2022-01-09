@@ -76,8 +76,8 @@ public class FileManager {
     }
 
     /**
-     *
-     * @return
+     * This method is used to manipulate the json file and convert it to objects so that the "ChessGame" can manipulate it further to be able to generate the chessboard correctly.
+     * @return a container object is returned whose purpose is to contain in an array all the nodes of the json file corresponding to the 6 token types
      */
     public JSONPieces loadGame() {
         try {
@@ -131,9 +131,9 @@ public class FileManager {
     }
 
     /**
-     *
-     * @param path
-     * @return
+     * This method takes care of verifying the existence of a directory
+     * @param path directory path to be verified
+     * @return "true" if the directory exists otherwise "false"
      */
     public boolean existDirectory(String path) {
         File file = new File(path);
@@ -208,7 +208,7 @@ public class FileManager {
     }
 
     /**
-     * Questo metodo si occupa di scrivere i contenuto passato come parametro nel file indicato.
+     * This method takes care of writing the content passed as a parameter to the given file.
      * @param file path including the name of the file to be write
      * @param obj string which will be written in the indicated file
      * @exception FileNotFoundException this exception is thrown when the given file does not exist in the folder
@@ -225,7 +225,7 @@ public class FileManager {
             System.out.print(ChessUtils.ANSI_GREEN);
             System.out.println(Constants.WRITE_FILE_CORRECT);
         } catch(FileNotFoundException e) {
-            throw new GenericException(Constants.FILE_NOT_FOUND);
+            throw new GenericException(Constants.PERMISSION_DENIED);
         } catch (IOException e) {
             throw new GenericException(Constants.IO_EXCEPTION);
         } catch(Exception e) {

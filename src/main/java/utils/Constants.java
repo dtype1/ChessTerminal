@@ -20,6 +20,7 @@ public class Constants {
     public static final String WRITE_FILE_CORRECT = "Il file è stato scritto con successo";
     public static final String WRONG_JSON_STRUCTURE = "Formattazione del file errata. Seguire il file di esempio.";
     public static final String ALTERNATIVE_FILE_WRITE = "Data l'esistenza di un file con lo stesso nome fornito per la scrittura, questa parita sarà scritta nel file '";
+    public static final String PERMISSION_DENIED = "Impossibile creare il file. Permessi negati!";
 
     // Piece's character id
     public static final char BISHOP_CHAR = 'B';
@@ -43,13 +44,12 @@ public class Constants {
     public static final String COMMENT_NODE = "__comment__";
 
     // Configuration
-    public static final String GENERIC_DIRECTORY = "c:\\";
+    public static final String GENERIC_DIRECTORY = "d:\\";
     public static final String GENERIC_FILE_READ = "readChess.json";
     public static final String GENERIC_FILE_WRITE = "writeChess.json";
     public static final String FILE_EXTENSION = ".json";
 
     public static final long RANDOM_NUMBER = Math.round(Math.random() * (500 - 10 + 1) + 10);
-
     public static final int NUM_ROWS = 8;
     public static final int NUM_COLUMNS = 8;
 }

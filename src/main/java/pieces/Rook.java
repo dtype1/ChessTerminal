@@ -1,7 +1,6 @@
 package pieces;
 
 import board.Board;
-import chess.ChessCoordinate;
 import chess.ChessPiece;
 import utils.ChessUtils;
 import utils.Constants;
@@ -11,6 +10,6 @@ import utils.Constants;
  */
 public class Rook extends ChessPiece {
     public Rook(Board board, ChessUtils chessUtils) {
-        super(board, chessUtils, Constants.ROOK_CHAR, Constants.ROOK, ChessUtils.convertToAscii(82), "\u265c");
+        super(board, chessUtils, Constants.ROOK_CHAR, Constants.ROOK, ChessUtils.convertToAscii(82));
     }
 }

@@ -11,7 +11,7 @@ public class Board {
     private final int columns;
     private final BoardPiece[][] boardPieces;
 
-    public Board(int rows, int columns) {
+    public Board(final int rows, final int columns) {
         if (rows < 1 || columns < 1 || rows > 8 || columns > 8) {
             throw new GenericException(Constants.INVALID_DIMENSION);
         }

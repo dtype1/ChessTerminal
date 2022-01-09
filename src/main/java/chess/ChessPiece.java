@@ -13,16 +13,14 @@ public abstract class ChessPiece extends BoardPiece {
      */
     private final ChessUtils color;
     private final String pieceName;
-    private final String unicode;
     private final Character pieceChar;
     private final Integer pieceAscii;
 
-    public ChessPiece(Board board, ChessUtils color, char pieceChar, String pieceName, int pieceAscii, String unicode) {
+    public ChessPiece(final Board board, final ChessUtils color, final char pieceChar, final String pieceName, final int pieceAscii) {
         super(board);
 
         this.color = color;
         this.pieceName = pieceName;
-        this.unicode = unicode;
         this.pieceChar = pieceChar;
         this.pieceAscii = pieceAscii;
     }
@@ -63,16 +61,8 @@ public abstract class ChessPiece extends BoardPiece {
      * Use this method if you want to get the ascii character of the token
      * @return ascii character
      */
-    public Character getAscii() {
-        return ChessUtils.convertToAscii(this.pieceAscii);
-    }
-
-    /**
-     * This method is a method that is called automatically when the object is called because it is the "toString" method.
-     * @return unicode character string
-     */
     @Override
     public String toString() {
-        return ChessUtils.generateUnicode(this.unicode);
+        return String.valueOf(ChessUtils.convertToAscii(this.pieceAscii));
     }
 }
