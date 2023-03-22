@@ -1,7 +1,7 @@
 # Chess Game - Versione terminale
 
 [![Java CI with Maven](https://github.com/ec25p5e/ChessTerminal/actions/workflows/maven.yml/badge.svg)](https://github.com/ec25p5e/ChessTerminal/actions/workflows/maven.yml)
-[![License](https://img.shields.io/github/license/ec25p5e/ChessTerminal)](https://github.com/ec25p5e/ChessTerminal/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/ec25p5e/ChessTerminal)](https://github.com/ec25p5e/ChessTerminal/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/v/release/ec25p5e/ChessTerminal?include_prereleases)](https://github.com/ec25p5e/ChessTerminal/releases)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)]()
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ec25p5e/ChessTerminal/issues)
